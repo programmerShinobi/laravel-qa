@@ -31,4 +31,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Question::class);
     }
+
+    public function getCreatedDateAttribute()
+    {
+        // return $this->created_at->diffForHumans();
+        return'#';
+    }
 }
