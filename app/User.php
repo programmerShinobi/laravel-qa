@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function questions()
     {
-        return $this->hasMany(Question::class);
+        return $this->hasMany(Post::class);
     }
 
     public function getCreatedDateAttribute()

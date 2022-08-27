@@ -14,14 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IndexController@index')->name('index');
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('posts.index');
 
-Route::resource('questions', 'QuestionsController')->except('show');
+// Route::resource('questions', 'QuestionsController')->except('show');
 
-Route::get('/questions/{slug}', 'QuestionsController@show')->name('questions.show');
+// Route::get('/questions/{slug}', 'QuestionsController@show')->name('questions.show');
+
+
+Route::resource('posts', 'PostsController')->except('show');
+
+Route::get('/posts/{id}', 'PostsController@show')->name('posts.show');

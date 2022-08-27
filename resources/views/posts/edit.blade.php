@@ -7,17 +7,20 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
-                        <h1>
-                            {{ $question->title }}
-                        </h1>
+                        <h2>
+                            Edit Post
+                        </h2>
                         <div class="ml-auto">
-                            <a href="{{ route('questions.index') }}" class="btn btn-outline-secondary">Back to All Questions</a>
+                            <a href="{{ route('posts.index') }}" class="btn btn-outline-secondary">Back to All Post</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="card-body">
-                    {!! $question->body_html !!}
+                    <form action="{{ route('posts.update', $post->id) }}" method="post">
+                        {{ method_field('PUT') }}
+                        @include('posts._form', ['buttonText' => 'Update Post'])
+                    </form>
                 </div>
             </div>
         </div>

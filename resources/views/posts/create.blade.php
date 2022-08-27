@@ -8,18 +8,17 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <h2>
-                            Edit Question
+                            New Post
                         </h2>
                         <div class="ml-auto">
-                            <a href="{{ route('questions.index') }}" class="btn btn-outline-secondary">Back to All Questions</a>
+                            <a href="{{ route('posts.index') }}" class="btn btn-outline-secondary">Back to All Posts</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('questions.update', $question->id) }}" method="post">
-                        {{ method_field('PUT') }}
-                        @include('questions._form', ['buttonText' => 'Update Question'])
+                    <form action="{{ route('posts.store') }}" method="post">
+                        @include('posts._form', ['buttonText' => 'New Post'])
                     </form>
                 </div>
             </div>

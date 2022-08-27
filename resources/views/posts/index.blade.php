@@ -41,7 +41,7 @@
                                 <p class="lead">
                                     Category
                                     {{ $post->category }}
-                                    <h6 class="text-muted">{{ $post->created_date }}</h6>
+                                    <small class="text-muted">{{ $post->created_date }}</small>
                                 </p>
                                 {{ str_limit($post->content, 100) }}
                             </div>
@@ -58,4 +58,3 @@
     </div>
 </div>
 @endsection
-
