@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Answer;
+use App\Question;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -36,5 +38,10 @@ class User extends Authenticatable
     {
         // return $this->created_at->diffForHumans();
         return'#';
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
     }
 }
