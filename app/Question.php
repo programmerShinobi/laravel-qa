@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\User;
-use App\Answer;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model

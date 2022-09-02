@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Answer;
-use App\Question;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
