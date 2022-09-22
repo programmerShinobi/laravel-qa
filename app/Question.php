@@ -51,4 +51,10 @@ class Question extends Model
         //question->answers()->count()
         //foreach ($question->answer as $answer)
     }
+
+    public function acceptBestAnswer(Answer $answer)
+    {
+        $this->best_answer_id = $answer->id;
+        $this->save();
+    }
 }
