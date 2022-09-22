@@ -6,11 +6,6 @@
  */
 
 require('./bootstrap');
-// require('./fontawesome');
-// require('./../fontawesome/css/solid.css');
-// require('./../fontawesome/js/solid.js');
-// require('./../fontawesome/webfonts/fa-solid-900.ttf')
-
 
 window.Vue = require('vue');
 
