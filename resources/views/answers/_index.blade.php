@@ -11,7 +11,6 @@
                     
                     @foreach ($answers as $answer)
                         @include('answers._answer')
-                        <hr>
                     @endforeach
                 </div>
             </div>
