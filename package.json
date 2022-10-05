@@ -17,9 +17,7 @@
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
         "popper.js": "^1.12",
-        "vue": "^2.5.7"
-    },
-    "dependencies": {
-        "@fortawesome/fontawesome-free": "npm::_authToken=DFC3D086-7E65-4E43-BFF6-92AAB4742B88@*"
+        "vue": "^2.5.7",
+        "vue-izitoast": "^1.2.1"
     }
 }
