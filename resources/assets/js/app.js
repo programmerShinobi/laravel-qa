@@ -10,10 +10,12 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import VueIziToast from 'vue-izitoast';
-
 import 'izitoast/dist/css/iziToast.css';
+import Authorization from './authorization/authorize';
+import Vue from 'vue';
 
 Vue.use(VueIziToast);
+Vue.use(Authorization);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
