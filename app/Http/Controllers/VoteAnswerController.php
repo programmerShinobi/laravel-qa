@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VoteAnswerController extends Controller
 {
@@ -16,7 +17,14 @@ class VoteAnswerController extends Controller
     {
         $vote = (int) request()->vote;
 
-        auth()->user()->voteAnswer($answer, $vote);
+        $votesCount = auth()->user()->voteAnswer($answer, $vote);
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'message' => 'Thanks for the feedbacks',
+                'votesCount' => $votesCount,
+            ]);
+        }
 
         return back();
     }
