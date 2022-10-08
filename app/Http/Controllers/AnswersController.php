@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Answer;
 use App\Question;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class AnswersController extends Controller
@@ -19,6 +18,7 @@ class AnswersController extends Controller
     {
         return $question->answers()->with('user')->simplePaginate(3);
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -29,16 +29,16 @@ class AnswersController extends Controller
     {
         $answer = $question->answers()->create($request->validate([
             'body' => 'required'
-        ])+['user_id' => Auth::id()]);
+        ]) + ['user_id' => Auth::id()]);
 
         if ($request->expectsJson()) {
             return response()->json([
-                'message' => "Your answer has been submitted succesfuly",
-                'answer' => $answer->load('user'),
+                'message' => "Your answer has been submitted successfully",
+                'answer' => $answer->load('user')
             ]);
         }
 
-        return back()->with('success', "Your answer has been submitted succesfuly");
+        return back()->with('success', "Your answer has been submitted successfully");
     }
 
     /**
@@ -73,7 +73,6 @@ class AnswersController extends Controller
             return response()->json([
                 'message' => 'Your answer has been updated',
                 'body_html' => $answer->body_html
-                
             ]);
         }
 
@@ -94,10 +93,11 @@ class AnswersController extends Controller
 
         if (request()->expectsJson()) {
             return response()->json([
-                'message' => "Your answer has been removed"
+                'message' => "Your answer has been removed",
+                'answer' => $answer->load('user')
             ]);
         }
 
-        return back()->with('success', 'Your answer has been removed');
+        return back()->with('success', "Your answer has been removed");
     }
 }
