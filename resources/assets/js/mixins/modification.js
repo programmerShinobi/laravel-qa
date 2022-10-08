@@ -1,4 +1,7 @@
+import highlight from "./highlight";
+
 export default {
+    mixins: [highlight],
     data () {
         return {
             editing: false
@@ -21,14 +24,15 @@ export default {
 
         update () {
             axios.put(this.endpoint, this.payload())
-            .catch(({response}) => {
-                this.$toast.error(response.data.message, "Error", { timeout: 3000 });
-            })
-            .then(({data}) => {
-                this.bodyHtml = data.body_html;
-                this.$toast.success(data.message, "Success", { timeout: 3000 });
-                this.editing = false;
-            })
+                .catch(({ response }) => {
+                    this.$toast.error(response.data.message, "Error", { timeout: 3000 });
+                })
+                .then(({ data }) => {
+                    this.bodyHtml = data.body_html;
+                    this.$toast.success(data.message, "Success", { timeout: 3000 });
+                    this.editing = false;
+                })
+                .then(() => this.highlight());
         },
 
         payload () {},
