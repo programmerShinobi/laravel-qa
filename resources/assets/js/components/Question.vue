@@ -77,11 +77,11 @@ export default {
     },
 
     computed: {
-        isInvalid () {
+        isInvalid() {
             return this.body.length < 10 || this.title.length < 10;
         },
 
-        endpoint () {
+        endpoint() {
             return `/questions/${this.id}`;
         },
 

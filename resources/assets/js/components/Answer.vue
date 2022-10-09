@@ -33,6 +33,7 @@
 
 <script>
 import modification from '../mixins/modification'
+import Prism from 'prismjs';
 
 export default {
     props: ['answer'],
@@ -46,6 +47,20 @@ export default {
             id: this.answer.id,
             questionId: this.answer.question_id,
             beforeEditCache: null
+        }
+    },
+
+    computed: {
+        isInvalid() {
+            return this.body.length < 10;
+        },
+
+        endpoint() {
+            return `/questions/${this.questionId}/answers/${this.id}`;
+        },
+
+        uniqueName() {
+            return `answer-${this.id}`; 
         }
     },
 
@@ -72,19 +87,5 @@ export default {
                 });
         } 
     },
-
-    computed: {
-        isInvalid () {
-            return this.body.length < 10;
-        },
-
-        endpoint () {
-            return `/questions/${this.questionId}/answers/${this.id}`;
-        },
-
-        uniqueName () {
-            return `answer-${this.id}`; 
-        }
-    }
 }
 </script>
