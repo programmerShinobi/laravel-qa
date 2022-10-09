@@ -3,11 +3,11 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" data-toggle="tab" :href="tabId('write', '#')">Write</a>
+                    <a class="nav-link active" data-toggle="tab" :href="tabId('write', '#')">Write</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" :href="tabId('preview', '#')">Preview</a>
-                </li>
+                </li>            
             </ul>
         </div>
         <div class="card-body tab-content">
@@ -23,7 +23,6 @@
 import MarkdownIt from 'markdown-it';
 import prism from 'markdown-it-prism';
 import autosize from 'autosize';
-import 'prismjs/themes/prism.css';
 
 const md = new MarkdownIt();
 md.use(prism);
@@ -32,19 +31,19 @@ export default {
     props: ['body', 'name'],
 
     computed: {
-        preview() {
+        preview () {
             return md.render(this.body);
         }
-    },
+    },    
 
     methods: {
-        tabId(tabName, hash = '') {
+        tabId (tabName, hash = '') {
             return `${hash}${tabName}${this.name}`;
         }
     },
 
-    updated() {
+    updated () {
         autosize(this.$el.querySelector('textarea'))
-    },
+    }
 }
 </script>

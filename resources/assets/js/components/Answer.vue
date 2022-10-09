@@ -13,7 +13,7 @@
                 <button class="btn btn-outline-secondary" @click="cancel" type="button">Cancel</button>
             </form>
             <div v-show="!editing">
-                <div v-html="bodyHtml" ref="bodyHtml"></div>
+                <div :id="uniqueName" v-html="bodyHtml" ref="bodyHtml"></div>
                 <div class="row">
                     <div class="col-4">
                         <div class="ml-auto">                            
@@ -49,27 +49,13 @@ export default {
         }
     },
 
-    computed: {
-        isInvalid () {
-            return this.body.length < 10;
-        },
-
-        endpoint () {
-            return `/questions/${this.questionId}/answers/${this.id}`;
-        },
-
-        uniqueName() {
-            return `answer-${this.id}`;
-        },
-    },
-
     methods: {
         setEditCache () {
             this.beforeEditCache = this.body;                        
         },
 
         restoreFromCache () {
-            this.body = this.beforeEditCache.body;            
+            this.body = this.beforeEditCache;            
         },
 
         payload () {
@@ -84,8 +70,21 @@ export default {
                     this.$toast.success(res.data.message, "Success", { timeout: 2000 });
                     this.$emit('deleted')
                 });
-                
         } 
     },
+
+    computed: {
+        isInvalid () {
+            return this.body.length < 10;
+        },
+
+        endpoint () {
+            return `/questions/${this.questionId}/answers/${this.id}`;
+        },
+
+        uniqueName () {
+            return `answer-${this.id}`; 
+        }
+    }
 }
 </script>
