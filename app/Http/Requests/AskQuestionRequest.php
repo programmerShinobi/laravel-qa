@@ -25,8 +25,10 @@ class AskQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:255',
-            'body' => 'required'
+            'title' => 'required|max:50',
+            'body' => 'required',
+            'title.required'    => 'Enter Question Title  !',
+            'body.required'     => 'Enter Question Body  !',
         ];
     }
 }
