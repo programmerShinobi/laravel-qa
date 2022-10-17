@@ -56,11 +56,6 @@ class QuestionsController extends Controller
             ], 400);
         } else {
 
-            // $question = Question::create([
-            //     'title' => $request->input('title'),
-            //     'body'  => $request->input('body'),
-            // ]);
-
             $question = $request->user()->questions()->create($request->only('title', 'body'));
 
             if ($question) {
@@ -87,7 +82,21 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        $question = Question::whereId($question->id)->first();
+
+        if ($question) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Question Details!',
+                'data'    => new QuestionResource($question)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Question Not Found!',
+                'data'    => ''
+            ], 404);
+        }
     }
 
     /**
@@ -99,7 +108,46 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+        $this->authorize("update", $question);
+        
+        //validate data
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'title'  => 'required|max:50',
+                'body'   => 'required',
+            ],
+            [
+                'title.required'    => 'Enter Question Title  !',
+                'body.required'     => 'Enter Question Body  !',
+            ]
+        );
+
+        if ($validator->fails()) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Please Fill in the Empty Columns',
+                'data'    => $validator->errors()
+            ], 400);
+        } else {
+
+            $question->update($request->only('title', 'body'));
+            
+            if ($question) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Your question has been Updated!',
+                    'question' => new QuestionResource($question),
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Your question has not been Updated!',
+                    'question' => new QuestionResource($question),
+                ], 400);
+            }
+        }
     }
 
     /**
@@ -110,6 +158,22 @@ class QuestionsController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        $this->authorize("delete", $question);
+
+        $question = Question::findOrFail($question->id);
+        $question->delete();
+
+        if ($question) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Question Deleted Successfully !',
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Question Failed to Delete !',
+            ], 500);
+        }
+
     }
 }

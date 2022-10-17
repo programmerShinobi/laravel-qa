@@ -27,8 +27,6 @@ class AskQuestionRequest extends FormRequest
         return [
             'title' => 'required|max:50',
             'body' => 'required',
-            'title.required'    => 'Enter Question Title  !',
-            'body.required'     => 'Enter Question Body  !',
         ];
     }
 }
