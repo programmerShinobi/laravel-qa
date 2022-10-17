@@ -18,11 +18,11 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $question = Question::with('user')->latest()->paginate(10);
+        $questions = Question::with('user')->latest()->paginate(10);
         return response([
             'success' => true,
             'message' => 'List All Questions',
-            'data' => QuestionResource::collection($question)
+            'data' => QuestionResource::collection($questions)
         ], 200);
     }
 
@@ -87,7 +87,7 @@ class QuestionsController extends Controller
         if ($question) {
             return response()->json([
                 'success' => true,
-                'message' => 'Question Details!',
+                'message' => 'Question Details For Title : '. $question->title,
                 'data'    => new QuestionResource($question)
             ], 200);
         } else {

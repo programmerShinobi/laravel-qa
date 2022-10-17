@@ -20,6 +20,18 @@ class QuestionDetailsController extends Controller
     {
         $question->increment('views');
 
-        return new QuestionDetailsResource($question);
+        if ($question) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Question Details !',
+                'data'    => new QuestionDetailsResource($question)
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Question Not Found!',
+                'data'    => ''
+            ], 404);
+        }
     }
 }

@@ -1,11 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Api\QuestionsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +16,14 @@ use App\Http\Controllers\Api\QuestionsController;
 |
 */
 
-Auth::routes();
-
-Route::post('token', [LoginController::class, 'getToken']);
-
+Route::post('/token', 'Auth\LoginController@getToken');
+Route::get('/questions', 'Api\QuestionsController@index');
+Route::get('/questions/{question}/answers', 'Api\AnswersController@index');
 Route::get('/questions/{question}-{slug}', 'Api\QuestionDetailsController');
 
 Route::middleware(['auth:api'])->group(function () {
     Route::apiResource('/questions', 'Api\QuestionsController')->except('index');
+    Route::apiResource('/questions.answers', 'Api\AnswersController')->except('index');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
