@@ -22,7 +22,8 @@ Auth::routes();
 
 Route::post('token', [LoginController::class, 'getToken']);
 
-// routes/api.php
+Route::get('/questions/{question}-{slug}', 'Api\QuestionDetailsController');
+
 Route::middleware(['auth:api'])->group(function () {
     Route::apiResource('/questions', 'Api\QuestionsController')->except('index');
 });
