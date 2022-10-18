@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// Route::post('/token', 'Auth\LoginController@getToken');
 
-Route::post('/token', 'Auth\LoginController@getToken');
+Route::post('/register', 'Api\Auth\RegisterController@register');
+Route::post('/login', 'Api\Auth\LoginController@store');
+Route::delete('/logout', 'Api\Auth\LoginController@destroy')->middleware('auth:api');
+
 Route::get('/questions', 'Api\QuestionsController@index');
 Route::get('/questions/{question}/answers', 'Api\AnswersController@index');
 Route::get('/questions/{question}-{slug}', 'Api\QuestionDetailsController');
