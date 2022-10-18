@@ -29,7 +29,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/answers/{answer}/accept', 'Api\AcceptAnswerController')->name('answers.accept');
     Route::post('/questions/{question}/favorites', 'Api\FavoritesController@store')->name('questions.favorite');
     Route::delete('/questions/{question}/favorites', 'Api\FavoritesController@destroy')->name('questions.unfavorite');
-
+    Route::get('/my-posts', 'Api\MyPostsController');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
