@@ -18,7 +18,8 @@ class AnswersController extends Controller
 
         return response([
             'success' => true,
-            'message' => 'List All Answers For Question Title : '. $question->title,
+            'message' => 'List All Answers',
+            'question' => $question->title,
             'data' => AnswerResource::collection($answers)
         ], 200);
     }

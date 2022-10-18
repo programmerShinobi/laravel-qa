@@ -43,8 +43,8 @@ class LoginController extends Controller
     {
         $request->request->add([
             'grant_type' => 'password',
-            'client_id' => 2,
-            'client_secret' => 'MGnIZnOuVvBPSR76LazEICSsCUiZ1GL97nyeQLds',
+            'client_id' => 4,
+            'client_secret' => 'gg40rosmFGM0tGylbKTj7czBSP9VKdvsFK4Rn1PY',
             'username' => $request->username,
             'password' => $request->password,
         ]);

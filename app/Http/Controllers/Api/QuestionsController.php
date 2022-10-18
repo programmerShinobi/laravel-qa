@@ -87,7 +87,7 @@ class QuestionsController extends Controller
         if ($question) {
             return response()->json([
                 'success' => true,
-                'message' => 'Question Details For Title : '. $question->title,
+                'message' => 'Question Details!',
                 'data'    => new QuestionResource($question)
             ], 200);
         } else {
