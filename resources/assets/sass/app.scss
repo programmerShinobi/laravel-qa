@@ -9,10 +9,10 @@
 @import '~bootstrap/scss/bootstrap';
 
 //Fontawesome
-@import '~@fortawesome/fontawesome/scss/brands';
-@import '~@fortawesome/fontawesome/scss/regular';
-@import '~@fortawesome/fontawesome/scss/solid';
-@import '~@fortawesome/fontawesome/scss/fontawesome';
+@import './fontawesome/scss/brands';
+@import './fontawesome/scss/regular';
+@import './fontawesome/scss/solid';
+@import './fontawesome/scss/fontawesome';
 
 body {
   background-color: #f5f8fa;

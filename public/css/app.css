@@ -12054,7 +12054,7 @@ a.text-dark:focus {
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url(/fonts/vendor/@fortawesome/fontawesome/webfa-brands-400.woff2?f4bdd85a576812f553ec3cfea8b1a2b5) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome/webfa-brands-400.ttf?9d2bbde416583cfa5cb30c995b41f732) format("truetype");
+  src: url(/fonts/fa-brands-400.woff2?f4bdd85a576812f553ec3cfea8b1a2b5) format("woff2"), url(/fonts/fa-brands-400.ttf?9d2bbde416583cfa5cb30c995b41f732) format("truetype");
 }
 
 .fab,
@@ -14075,7 +14075,7 @@ a.text-dark:focus {
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url(/fonts/vendor/@fortawesome/fontawesome/webfa-regular-400.woff2?83e2813a8fe0229d916c5b63fa9eab5e) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome/webfa-regular-400.ttf?f417567703b4fcfbf750952bd2db8a44) format("truetype");
+  src: url(/fonts/fa-regular-400.woff2?83e2813a8fe0229d916c5b63fa9eab5e) format("woff2"), url(/fonts/fa-regular-400.ttf?f417567703b4fcfbf750952bd2db8a44) format("truetype");
 }
 
 .far,
@@ -14100,7 +14100,7 @@ a.text-dark:focus {
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url(/fonts/vendor/@fortawesome/fontawesome/webfa-solid-900.woff2?3e50e269ee627bb2279f91d18c085167) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome/webfa-solid-900.ttf?dd5e5b90ca8ee986b13b04310f9aef9d) format("truetype");
+  src: url(/fonts/fa-solid-900.woff2?3e50e269ee627bb2279f91d18c085167) format("woff2"), url(/fonts/fa-solid-900.ttf?dd5e5b90ca8ee986b13b04310f9aef9d) format("truetype");
 }
 
 .fas,

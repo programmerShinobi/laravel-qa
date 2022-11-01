@@ -20,7 +20,8 @@
         "markdown-it": "^13.0.1",
         "markdown-it-prism": "^2.3.0",
         "popper.js": "^1.12",
-        "vue": "^2.5.7",
-        "vue-izitoast": "^1.2.1"
+        "vue": "^2.7.13",
+        "vue-izitoast": "^1.2.1",
+        "vue-router": "^3.4.2"
     }
 }
