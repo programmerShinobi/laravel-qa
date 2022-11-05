@@ -18,11 +18,14 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $questions = Question::with('user')->latest()->paginate(10);
+        $questions = Question::with('user')->latest()->paginate(5);
+
         return response([
             'success' => true,
             'message' => 'List All Questions',
-            'data' => QuestionResource::collection($questions)
+            'data' => QuestionResource::collection($questions),
+            'links' => $questions,
+            'meta'=> $questions,
         ], 200);
     }
 

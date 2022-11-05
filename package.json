@@ -10,6 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "@volar-plugins/vetur": "^0.1.0",
         "autosize": "^5.0.1",
         "axios": "^0.17",
         "bootstrap": "^4.0.0",
@@ -22,6 +23,8 @@
         "popper.js": "^1.12",
         "vue": "^2.7.13",
         "vue-izitoast": "^1.2.1",
-        "vue-router": "^3.4.2"
+        "vue-loader": "^13.7.3",
+        "vue-router": "^3.4.2",
+        "vue-template-compiler": "^2.7.13"
     }
 }
