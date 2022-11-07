@@ -19,9 +19,10 @@
                         :to="{ name: 'questions.edit', params: { id: question.id } }" 
                         v-if="authorize('modify', question)" 
                         class="btn btn-sm btn-outline-info">Edit</router-link>
-                    <form v-if="authorize('deleteQuestion', question)" class="form-delete" method="post" action="#">
-
-                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    <button 
+                        v-if="authorize('deleteQuestion', question)" 
+                        class="btn btn-sm btn-outline-danger" 
+                        @click="destroy">Delete</button>
                     </form>
                 </div>
             </div>
@@ -36,7 +37,11 @@
 </template>
 
 <script>
+import destroy from '../mixins/destroy'
+
 export default {
+    mixins: [destroy],
+    
     props: ['question'],
 
     methods: {
