@@ -7,6 +7,7 @@ use Parsedown;
 use App\Answer;
 use Mews\Purifier\Purifier;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\URL;
 
 class Question extends Model
 {
@@ -99,8 +100,14 @@ class Question extends Model
         return str_limit(strip_tags($this->bodyHtml()), $length);
     }
 
+    public function body()
+    {
+        return strip_tags($this->bodyHtml());
+    }
+
     private function bodyHtml()
     {
         return \Parsedown::instance()->text($this->body);
     }
+
 }

@@ -31,6 +31,14 @@ import EventBus from '../event-bus'
 import MEditor from './MEditor.vue'
 
 export default {
+    props: {
+        isEdit: {
+            type: Boolean,
+            default: false
+        },
+    },    
+    
+    
     components: { MEditor },
     data () {
         return {
@@ -38,22 +46,37 @@ export default {
             body: '',           
             errors: {
                 title: '',
-                body: ''
+                body: '',
             }            
         }
     },
 
     mounted () {
         EventBus.$on('error', errors => this.errors = errors)
+
+        if (this.isEdit) {
+            this.fetchQuestion();
+        }
     },
 
     computed: {
         buttonText () {
-            return 'Ask Question'
+            return this.isEdit ? 'Update Question' : 'Ask Question'
         }
     },
 
     methods: {
+        fetchQuestion () {
+            axios.get(`/questions/${this.$route.params.id}`)
+            .then(({ data }) => {
+                this.title = data.data.title
+                this.body = data.data.body
+                })
+            .catch(error => {
+                console.log(error.response);
+                })
+        },
+        
         handleSubmit () {
             this.$emit('submitted', {
                 title: this.title,

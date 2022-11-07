@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\QuestionResource;
 use App\Http\Requests\AskQuestionRequest;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\QuestionDetailsResource;
 
 class QuestionsController extends Controller
 {
@@ -41,7 +42,7 @@ class QuestionsController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'title'  => 'required|max:50',
+                'title'  => 'required|max:255',
                 'body'   => 'required',
             ],
             [
@@ -91,7 +92,7 @@ class QuestionsController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Question Details!',
-                'data'    => new QuestionResource($question)
+                'data'    => new QuestionDetailsResource($question)
             ], 200);
         } else {
             return response()->json([
@@ -117,7 +118,7 @@ class QuestionsController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'title'  => 'required|max:50',
+                'title'  => 'required|max:255',
                 'body'   => 'required',
             ],
             [
@@ -141,13 +142,13 @@ class QuestionsController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'Your question has been Updated!',
-                    'question' => new QuestionResource($question),
+                    'question' => new QuestionDetailsResource($question),
                 ], 200);
             } else {
                 return response()->json([
                     'success' => false,
                     'message' => 'Your question has not been Updated!',
-                    'question' => new QuestionResource($question),
+                    'question' => new QuestionDetailsResource($question),
                 ], 400);
             }
         }
