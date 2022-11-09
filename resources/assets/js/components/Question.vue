@@ -26,7 +26,7 @@
                         <div class="d-flex align-items-center">
                             <h1>{{ title }}</h1>
                             <div class="ml-auto">
-                                <a href="/questions" class="btn btn-outline-secondary">Back to all Questions</a>
+                                <router-link exact :to="{ name: 'questions' }" class="btn btn-outline-secondary">Back to all Questions</router-link>
                             </div>
                         </div>                        
                     </div>
@@ -60,17 +60,24 @@
 
 <script>
 import modification from '../mixins/modification';
+import EventBus from '../event-bus';
+import Prism from 'prismjs';
 
 export default {
+    mounted () {
+        EventBus.$on('answers-count-changed', (count) => {
+            this.question.answers_count = count;
+        })
+    },
     props: ['question'],
 
     mixins: [modification],
 
     data () {
         return {
-            title: this.question.title,
             body: this.question.body,
             bodyHtml: this.question.body_html,            
+            title: this.question.title,
             id: this.question.id,
             beforeEditCache: {}
         }
@@ -120,6 +127,7 @@ export default {
                 setTimeout(() => {
                     window.location.href = "/questions";
                 }, 3000);
+            this.$router.push({ name: 'questions' });
         }
     }
 }

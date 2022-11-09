@@ -5,9 +5,13 @@ namespace App;
 use Parsedown;
 
 use App\Answer;
+use GuzzleHttp\Psr7\LimitStream;
+use HTMLPurifier_AttrDef_HTML_Length;
+use Illuminate\Cache\RateLimiter;
 use Mews\Purifier\Purifier;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
+use LengthException;
 
 class Question extends Model
 {
@@ -28,10 +32,15 @@ class Question extends Model
         $this->attributes['slug'] = str_slug($value);
     }
 
-    // public function setBodyAttribute($value)
-    // {
-    //     $this->attributes['body'] = clean($value);
-    // }
+    public function setBodyAttribute($value)
+    {
+         $this->attributes['body'] = $value;
+    }
+
+    public function body()
+    {
+        return $this->setBodyAttribute();
+    }
 
     public function getUrlAttribute()
     {
@@ -56,7 +65,12 @@ class Question extends Model
 
     public function getBodyHtmlAttribute()
     {
-        return clean($this->bodyHtml());
+        return clean(\Parsedown::instance()->text($this->body));
+    }
+
+    private function bodyHtml()
+    {
+        return $this->getBodyHtmlAttribute();
     }
 
     public function answers()
@@ -77,7 +91,9 @@ class Question extends Model
 
     public function isFavorited()
     {
-        return  $this->favorites()->where('user_id', auth()->id())->count() > 0;
+        // return $this->favorites()->where('user_id', auth()->id())->count() > 0;
+        return $this->favorites()->where('user_id', request()->user()->id())->count() > 0;
+        // return $this->favorites()->where('user_id', auth('api')->id())->count() > 0;
     }
 
     public function getIsFavoritedAttribute()
@@ -97,17 +113,7 @@ class Question extends Model
 
     public function excerpt($length)
     {
-        return str_limit(strip_tags($this->bodyHtml()), $length);
-    }
-
-    public function body()
-    {
-        return strip_tags($this->bodyHtml());
-    }
-
-    private function bodyHtml()
-    {
-        return \Parsedown::instance()->text($this->body);
+        return str_limit(strip_tags($this->bodyHtml()), $length);        
     }
 
 }

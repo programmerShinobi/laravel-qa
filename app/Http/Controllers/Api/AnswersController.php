@@ -14,13 +14,19 @@ class AnswersController extends Controller
 {
     public function index(Question $question)
     {
-        $answers = $question->answers()->with('user')->simplePaginate(3);
+        $answers = $question->answers()->with('user')->where(function ($q) {
+            if (request()->has('excludes')) {
+                $q->whereNotIn('id', request()->query('excludes'));
+            }
+        })->simplePaginate(3);   
 
         return response([
             'success' => true,
             'message' => 'List All Answers',
             'question' => $question->title,
-            'data' => AnswerResource::collection($answers)
+            'data' => AnswerResource::collection($answers),
+            'links' => $answers,
+            'meta' => $answers,
         ], 200);
     }
 
