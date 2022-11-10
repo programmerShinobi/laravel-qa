@@ -20,7 +20,10 @@
                 </m-editor>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-outline-primary btn-lg">{{ buttonText }}</button>
+                <button type="submit" class="btn btn-outline-primary btn-lg">
+                    <spinner :small="true" v-if="$root.loading"></spinner>
+                    <span v-else>{{ buttonText }}</span>
+                </button>
             </div>
         </form>
     </div>

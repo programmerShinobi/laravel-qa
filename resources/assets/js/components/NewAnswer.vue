@@ -14,7 +14,10 @@
                             </m-editor>
                         </div>
                         <div class="form-group">
-                            <button :disabled="isInvalid" class="btn btn-lg btn-outline-primary" type="submit">Submit</button>                            
+                            <button :disabled="isInvalid" class="btn btn-lg btn-outline-primary" type="submit">
+                                <spinner :small="true" :min-width="59.23" v-if="$root.loading"></spinner>
+                                <span v-else>Submit</span>
+                            </button>                            
                         </div>
                     </form>
                 </div>

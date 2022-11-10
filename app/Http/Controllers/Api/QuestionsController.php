@@ -20,7 +20,9 @@ class QuestionsController extends Controller
     public function index()
     {
         $questions = Question::with('user')->latest()->paginate(5);
-
+        
+        if (env('APP_ENV') == 'local') sleep(2);
+        
         return response([
             'success' => true,
             'message' => 'List All Questions',
@@ -38,6 +40,8 @@ class QuestionsController extends Controller
      */
     public function store(Request $request)
     {
+        if (env('APP_ENV') == 'local') sleep(2);
+        
         //validate data
         $validator = Validator::make(
             $request->all(),

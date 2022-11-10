@@ -38,6 +38,8 @@ class AnswersController extends Controller
      */
     public function store(Question $question, Request $request)
     {
+        if (env('APP_ENV') == 'local') sleep(2);
+        
         //validate data
         $validator = Validator::make(
             $request->all(),
