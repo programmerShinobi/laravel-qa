@@ -9,7 +9,7 @@ const routes = [
     {
         path: '/',
         component: QuestionsPage,
-        name: 'home'
+        name: 'questions'
     },
     {
         path: '/questions',
@@ -28,6 +28,14 @@ const routes = [
     },
     {
         path: '/my-posts',
+        component: MyPostsPage,
+        name: 'my-posts',
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/home',
         component: MyPostsPage,
         name: 'my-posts',
         meta: {

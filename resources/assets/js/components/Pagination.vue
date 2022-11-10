@@ -20,7 +20,10 @@ export default {
     props: ['meta', 'links'],
     computed: {
         pagesInfo() {
-            return `Page ${this.meta.current_page} of ${this.meta.last_page}`
+            let currentPage = this.meta.current_page || 1,
+                lastPage = this.meta.last_page || 1;
+           
+            return `Page ${currentPage} of ${lastPage}`
         },
         isFirst() {
             return this.meta.current_page === 1;

@@ -1,15 +1,14 @@
 <template>
     <div>
         <div class="card-body">
-            <spinner v-if="$root.loading"></spinner>
-            <div v-else-if="questions.length">
+            <div v-if="questions.length">
                 <question-excerpt 
-                @deleted="remove(index)"
                 v-for="question in questions" 
                 :question="question" 
                 :key="question.id"></question-excerpt>
             </div>
-            <div v-else class="alert alert-warning">
+            <spinner v-if="$root.loading"></spinner>
+            <div v-else class="alert alert-warning mt-3">
                 <strong>Sorry</strong> There are no questions available.
             </div>
         </div>
@@ -22,6 +21,7 @@
 <script>
 import QuestionExcerpt from './QuestionExcerpt.vue'
 import Pagination from './Pagination.vue'
+import eventBus from '../event-bus'
 
 export default {
     components: { 
@@ -39,6 +39,11 @@ export default {
 
     mounted () {
         this.fetchQuestions();
+        
+        eventBus.$on('deleted', (id) => {
+            let index = this.questions.findIndex(question => id === question.id)  
+            this.remove(index)
+        })
     },
 
     methods: {

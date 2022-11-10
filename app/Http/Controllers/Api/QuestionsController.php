@@ -168,6 +168,9 @@ class QuestionsController extends Controller
     {
         $this->authorize("delete", $question);
 
+        // $question->delete();
+        if (env('APP_ENV') == 'local') sleep(2);
+
         $question = Question::findOrFail($question->id);
         $question->delete();
 
