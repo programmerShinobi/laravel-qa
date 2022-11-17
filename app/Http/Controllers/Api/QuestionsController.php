@@ -46,11 +46,12 @@ class QuestionsController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'title'  => 'required|max:255',
+                'title'  => 'required|max:255|unique:questions,title,',
                 'body'   => 'required',
             ],
             [
                 'title.required'    => 'Enter Question Title  !',
+                'title.unique'    => 'Duplicate Entry Question Title  !',
                 'body.required'     => 'Enter Question Body  !',
             ]
         );
@@ -59,7 +60,7 @@ class QuestionsController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'Please Fill in the Empty Columns',
+                'message' => 'Please fill in / check again in each column : Required | Duplicate Entry | Title Max:255',
                 'data'    => $validator->errors()
             ], 400);
         } else {
@@ -122,11 +123,12 @@ class QuestionsController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'title'  => 'required|max:255',
+                'title'  => 'required|max:255|unique:questions,title,'. $question->id . ',id',
                 'body'   => 'required',
             ],
             [
                 'title.required'    => 'Enter Question Title  !',
+                'title.unique'    => 'Duplicate Entry Question Title  !',
                 'body.required'     => 'Enter Question Body  !',
             ]
         );
@@ -135,7 +137,7 @@ class QuestionsController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'Please Fill in the Empty Columns',
+                'message' => 'Please fill in / check again in each column : Required | Duplicate Entry | Title Max:255',
                 'data'    => $validator->errors()
             ], 400);
         } else {
@@ -152,7 +154,7 @@ class QuestionsController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Your question has not been Updated!',
-                    'question' => new QuestionDetailsResource($question),
+                    'question' => '',
                 ], 400);
             }
         }

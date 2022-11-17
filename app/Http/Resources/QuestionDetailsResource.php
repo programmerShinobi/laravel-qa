@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class QuestionDetailsResource extends JsonResource
@@ -17,6 +18,7 @@ class QuestionDetailsResource extends JsonResource
         return [
             'id'              => $this->id,
             'title'           => $this->title,
+            'slug'            => $this->id . '-' . $this->slug,
             'votes_count'     => $this->votes_count,
             'answers_count'   => $this->answers_count,
             'is_favorited'    => $this->is_favirited,

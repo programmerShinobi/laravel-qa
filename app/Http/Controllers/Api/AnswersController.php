@@ -38,7 +38,6 @@ class AnswersController extends Controller
      */
     public function store(Question $question, Request $request)
     {
-        if (env('APP_ENV') == 'local') sleep(2);
         
         //validate data
         $validator = Validator::make(
@@ -59,17 +58,19 @@ class AnswersController extends Controller
             $answer = $question->answers()->create($request->only('body') + ['user_id' => Auth::id()]);
 
             if ($question) {
+                if (env('APP_ENV') == 'local') sleep(2);
                 return response()->json([
                     'success' => true,
                     'message' => 'Your answer has been submitted!',
-                    'question' => $question->title,
+                    'questionTitle' => $question->title,
                     'answer' => new AnswerResource($answer->load('user')),
                 ], 200);
             } else {
+                if (env('APP_ENV') == 'local') sleep(2);
                 return response()->json([
                     'success' => false,
                     'message' => 'Your answer has not been submitted!',
-                    'question' => $question->title,
+                    'questionTitle' => $question->title,
                     'answer' => new AnswerResource($answer->load('user')),
                 ], 400);
             }
@@ -87,7 +88,7 @@ class AnswersController extends Controller
     public function update(Request $request, Question $question, Answer $answer)
     {
         $this->authorize('update', $answer);
-
+        
         //validate data
         $validator = Validator::make(
             $request->all(),
@@ -110,15 +111,15 @@ class AnswersController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'Your answer has been Updated!',
-                    'question' => $question->title,
+                    'questionTitle' => $question->title,
                     'answer' => new AnswerResource($answer),
                 ], 200);
             } else {
                 return response()->json([
                     'success' => false,
                     'message' => 'Your answer has not been Updated!',
-                    'question' => $question->title,
-                    'answer' => new AnswerResource($answer),
+                    'questionTitle' => $question->title,
+                    'answer' => '',
                 ], 400);
             }
         }

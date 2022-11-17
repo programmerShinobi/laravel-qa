@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,26 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['verify' => true]);
-Route::view('/{any}', 'spa')->where('any', '.*');
-Route::get('/', 'QuestionsController@index');
+Route::get('/login', 'LoginController@index');
+Route::get('/register', 'RegisterController@index');
 
+Auth::routes(['verify' => true]);
 
 Route::middleware('verified')->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
-
-    Route::resource('questions', 'QuestionsController')->except('show', 'index');
-    // Route::post('/questions/{question}/answers', 'AnswersController@store')->name('answers.store');
-    Route::resource('questions.answers', 'AnswersController')->except(['create', 'show', 'index']);
-    Route::post('/answers/{answer}/accept', 'AcceptAnswerController')->name('answers.accept');
-
-    Route::post('/questions/{question}/favorites', 'FavoritesController@store')->name('questions.favorite');
-    Route::delete('/questions/{question}/favorites', 'FavoritesController@destroy')->name('questions.unfavorite');
-
-    Route::post('/questions/{question}/vote', 'VoteQuestionController');
-    Route::post('/answers/{answer}/vote', 'VoteAnswerController');
+    $index = 'QuestionsController@index';
+    Route::get('/home', $index)->name('home');
+    Route::get('/questions/create', $index)->name('questions.create');
+    Route::get('/questions/{id}/edit', $index)->name('questions.edit');
+    Route::get('/my-posts', $index)->name('my-posts');
 });
 
-Route::get('/questions/{question}/answers', 'AnswersController@index')->name('questions.answers.index');
-Route::get('/questions/{slug}', 'QuestionsController@show')->name('questions.show');
-Route::get('/questions', 'QuestionsController@index')->name('questions.index');
+Route::view('/', 'spa');
+$index_guest = 'QuestionsController@index';
+Route::get('/questions', $index_guest)->name('questions');
+Route::get('/questions/{id}', $index_guest)->name('questions.show');
+Route::get('/questions/{slug}', $index_guest)->name('questions.show');

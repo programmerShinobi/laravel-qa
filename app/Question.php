@@ -39,7 +39,7 @@ class Question extends Model
 
     public function body()
     {
-        return $this->setBodyAttribute();
+        return $this->body();
     }
 
     public function getUrlAttribute()
@@ -70,7 +70,7 @@ class Question extends Model
 
     private function bodyHtml()
     {
-        return $this->getBodyHtmlAttribute();
+        return clean(\Parsedown::instance()->text($this->body));
     }
 
     public function answers()
@@ -113,7 +113,7 @@ class Question extends Model
 
     public function excerpt($length)
     {
-        return str_limit(strip_tags($this->bodyHtml()), $length);        
+        return str_limit(strip_tags($this->bodyHtml()), $length);
     }
 
 }

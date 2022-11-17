@@ -13,7 +13,7 @@
         "fideloper/proxy": "~4.0",
         "ibrows/doctrine-dblib-sql-driver": "^1.0",
         "lapaygroup/doctrine-pdo-dblib": "^0.1.1",
-        "laravel/framework": "5.6.*",
+        "laravel/framework": "5.7.*",
         "laravel/passport": "^7.5.1",
         "laravel/tinker": "~1.0",
         "lcobucci/jwt": "^3.3.3",
@@ -23,6 +23,7 @@
         "yiisoft/event-dispatcher": "^1.0"
     },
     "require-dev": {
+        "beyondcode/laravel-dump-server": "^1.0",
         "barryvdh/laravel-debugbar": "*",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",

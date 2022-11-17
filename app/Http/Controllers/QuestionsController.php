@@ -11,6 +11,7 @@ class QuestionsController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
+        // $this->middleware('auth');
     }
 
     /**
@@ -22,7 +23,8 @@ class QuestionsController extends Controller
     {
         $questions = Question::with('user')->latest()->paginate(10);
 
-        return view('questions.index', compact('questions'));
+        // return view('questions.index', compact('questions'));
+        return view('spa', compact('questions'));
     }
 
     /**
