@@ -20,9 +20,9 @@ class QuestionsController extends Controller
     public function index()
     {
         $questions = Question::with('user')->latest()->paginate(5);
-        
+
         if (env('APP_ENV') == 'local') sleep(2);
-        
+
         return response([
             'success' => true,
             'message' => 'List All Questions',
@@ -41,7 +41,7 @@ class QuestionsController extends Controller
     public function store(Request $request)
     {
         if (env('APP_ENV') == 'local') sleep(2);
-        
+
         //validate data
         $validator = Validator::make(
             $request->all(),
@@ -118,7 +118,7 @@ class QuestionsController extends Controller
     public function update(Request $request, Question $question)
     {
         $this->authorize("update", $question);
-        
+
         //validate data
         $validator = Validator::make(
             $request->all(),
@@ -143,7 +143,7 @@ class QuestionsController extends Controller
         } else {
 
             $question->update($request->only('title', 'body'));
-            
+
             if ($question) {
                 return response()->json([
                     'success' => true,

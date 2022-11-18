@@ -4,12 +4,12 @@
         :class="classes"
         @click.prevent="create"
         >
-            <i class="fa-solid fa-check fa-2x"></i>                                    
+            <i class="fa-solid fa-check fa-2x"></i>
         </a>
 
         <a v-if="accepted" title="The question owner accepted this answer as best answer"
         :class="classes">
-            <i class="fa-solid fa-check fa-2x"></i>                                    
+            <i class="fa-solid fa-check fa-2x"></i>
         </a>
 
 
@@ -20,12 +20,12 @@
 import EventBus from '../event-bus';
 
 export default {
-    props: ['answer'], 
+    props: ['answer'],
 
     data() {
         return {
             isBest: this.answer.is_best,
-            id: this.answer.id  
+            id: this.answer.id
         }
     },
 
@@ -44,17 +44,21 @@ export default {
                 });
                 return;
             }
-            
+
             axios.post(`/answers/${this.id}/accept`)
-                .then(res => {
-                    this.$toast.success(res.data.message, "Success", {
-                        timeout: 3000,
-                        position: 'bottomLeft',
-                    });
+            .then(res => {
+                this.$toast.success(res.data.message, "Success", {
+                    timeout: 3000,
+                    position: 'bottomLeft',
+                });
 
-                    this.isBest = true;
+                this.isBest = true;
 
-                    EventBus.$emit('accepted', this.id);
+                EventBus.$emit('accepted', this.id);
+            })
+            .catch(({ response }) => {
+                this.$toast.error(response.data.message, "Failed", { timeout: 3000 });
+                EventBus.$emit('error', response.data.data);
             })
         }
     },
@@ -72,7 +76,7 @@ export default {
             return [
                 'mt-2',
                 this.isBest ? 'vote-accepted' : ''
-            ]  
+            ]
         },
     }
 }

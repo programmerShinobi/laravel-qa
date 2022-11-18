@@ -51,7 +51,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return $this->getKey();
     }
-    
+
     public function getJWTCustomClaims()
     {
         return [];
@@ -88,7 +88,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
         } else {
             $posts = $this->answers()->with('question')->get();
-            
+
             if ($type !== 'answers') {
                 $posts2 = $this->questions()->get();
 

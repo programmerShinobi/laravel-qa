@@ -62711,7 +62711,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("p", { staticClass: "lead" }, [
-        _vm._v("\n            Asked by \n            "),
+        _vm._v("\n            Asked by\n            "),
         _c("a", { attrs: { href: "#" } }, [
           _vm._v(_vm._s(_vm.question.user.name))
         ]),
@@ -63919,6 +63919,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
 
                 _this.count = res.data.votesCount;
+            }).catch(function (_ref) {
+                var response = _ref.response;
+
+                _this.$toast.error(response.data.message, "Failed", { timeout: 3000 });
+                EventBus.$emit('error', response.data.data);
             });
         }
     }
@@ -64034,6 +64039,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.delete(this.endpoint).then(function (res) {
                 _this.count--;
                 _this.isFavorited = false;
+            }).catch(function (_ref) {
+                var response = _ref.response;
+
+                _this.$toast.error(response.data.message, "Failed", { timeout: 3000 });
+                EventBus.$emit('error', response.data.data);
             });
         },
         create: function create() {
@@ -64042,6 +64052,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post(this.endpoint).then(function (res) {
                 _this2.count++;
                 _this2.isFavorited = true;
+            }).catch(function (_ref2) {
+                var response = _ref2.response;
+
+                _this2.$toast.error(response.data.message, "Failed", { timeout: 3000 });
+                EventBus.$emit('error', response.data.data);
             });
         }
     }
@@ -64203,6 +64218,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.isBest = true;
 
                 __WEBPACK_IMPORTED_MODULE_0__event_bus__["a" /* default */].$emit('accepted', _this2.id);
+            }).catch(function (_ref) {
+                var response = _ref.response;
+
+                _this2.$toast.error(response.data.message, "Failed", { timeout: 3000 });
+                __WEBPACK_IMPORTED_MODULE_0__event_bus__["a" /* default */].$emit('error', response.data.data);
             });
         }
     },

@@ -14,8 +14,8 @@ class CreateFavoritesTable extends Migration
     public function up()
     {
         Schema::create('favorites', function (Blueprint $table) {
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('question_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('question_id');
             $table->timestamps();
             $table->unique(['user_id', 'question_id']);
         });

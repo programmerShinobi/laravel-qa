@@ -40,7 +40,7 @@ export default {
                 });
                 return;
             }
-            
+
             if (! window.Auth.user.email_verified_at) {
                 this.$toast.warning(`Please check your email for a verification link`, "Warning", {
                     timout: 3000,
@@ -52,10 +52,14 @@ export default {
         },
 
         destroy() {
-            axios.delete(this.endpoint) 
+            axios.delete(this.endpoint)
             .then(res => {
                 this.count--;
                 this.isFavorited = false;
+            })
+            .catch(({ response }) => {
+                this.$toast.error(response.data.message, "Failed", { timeout: 3000 });
+                EventBus.$emit('error', response.data.data);
             })
         },
 
@@ -64,6 +68,10 @@ export default {
             .then(res => {
                 this.count++;
                 this.isFavorited = true;
+            })
+            .catch(({ response }) => {
+                this.$toast.error(response.data.message, "Failed", { timeout: 3000 });
+                EventBus.$emit('error', response.data.data);
             })
         }
     },

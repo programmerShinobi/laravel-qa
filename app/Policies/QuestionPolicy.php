@@ -33,28 +33,4 @@ class QuestionPolicy
     {
         return $user->id === $question->user_id && $question->answers_count < 1;
     }
-
-    /**
-     * Determine whether the user can restore the question.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Question  $question
-     * @return mixed
-     */
-    public function restore(User $user, Question $question)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the question.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Question  $question
-     * @return mixed
-     */
-    public function forceDelete(User $user, Question $question)
-    {
-        //
-    }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Http\Response;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,10 +13,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (config('app.debug')) {
-            error_reporting(E_ALL & ~E_USER_DEPRECATED);
-        } else {
-            error_reporting(0);
+        // if (config('app.debug')) {
+        //     error_reporting(E_ALL & ~E_USER_DEPRECATED);
+        // } else {
+        //     error_reporting(0);
+        // }
+
+        if (config('app.env') === 'production') {
+            \URL::forceScheme('https');
         }
 
     }
