@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Answer;
-use App\Question;
+use App\Models\Answer;
+use App\Models\Question;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Resources\AnswerResource;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,7 +19,7 @@ class AnswersController extends Controller
             if (request()->has('excludes')) {
                 $q->whereNotIn('id', request()->query('excludes'));
             }
-        })->simplePaginate(3);   
+        })->simplePaginate(3);
 
         return response([
             'success' => true,
@@ -38,7 +39,7 @@ class AnswersController extends Controller
      */
     public function store(Question $question, Request $request)
     {
-        
+
         //validate data
         $validator = Validator::make(
             $request->all(),
@@ -76,19 +77,19 @@ class AnswersController extends Controller
             }
         }
     }
-    
+
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Answer  $answer
+     * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Question $question, Answer $answer)
     {
-        $this->authorize('update', $answer);
-        
+        Gate::authorize('update', $answer);
+
         //validate data
         $validator = Validator::make(
             $request->all(),
@@ -128,12 +129,12 @@ class AnswersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Answer  $answer
+     * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
     public function destroy(Question $question, Answer $answer)
     {
-        $this->authorize('delete', $answer);
+        Gate::authorize('delete', $answer);
 
         $answer->delete();
 

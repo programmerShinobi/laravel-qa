@@ -8,7 +8,7 @@ import EventBus from '../event-bus'
 export default {
     mixins: [highlight, destroy],
 
-    components: { Vote, UserInfo, MEditor },
+    components: {Vote, UserInfo, MEditor  },
 
     data () {
         return {

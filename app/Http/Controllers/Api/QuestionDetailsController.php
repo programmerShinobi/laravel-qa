@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Question;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\QuestionResource;
@@ -16,11 +16,10 @@ class QuestionDetailsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Question $question)
+    public function index(Question $question)
     {
-        $question->increment('views');
-
         if ($question) {
+            $question->increment('views');
             return response()->json([
                 'success' => true,
                 'message' => 'Question Details !',

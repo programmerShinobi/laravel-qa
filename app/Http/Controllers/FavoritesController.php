@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Question;
+use App\Models\Question;
 use Illuminate\Http\Request;
 
 class FavoritesController extends Controller
@@ -30,7 +30,7 @@ class FavoritesController extends Controller
         if (request()->expectsJson()) {
             return response()->json(null, 204);
         }
-        
+
         return back();
     }
 }

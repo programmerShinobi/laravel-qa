@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -16,29 +16,15 @@ class RegisterController extends Controller
 {
     public function register(Request $request)
     {
-        //validate data
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:6', 'confirmed'],
-            ],
-            [
-                'name.required'    => 'Enter name  !',
-                'email.required'     => 'Enter email  !',
-                'password.required'     => 'Enter password  !',
-            ]
-        );
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
 
         if ($validator->fails()) {
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Please Fill in the Empty Columns',
-                'data'    => $validator->errors()
-            ], 400);
-        } else {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
 
         $user = User::create([
             'name' => $request->get('name'),
@@ -47,21 +33,6 @@ class RegisterController extends Controller
         ]);
 
         $token = JWTAuth::fromUser($user);
-
-            if ($user) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Your question has been submitted!',
-                    'question' => $user,
-                ], 200);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Your question has not been submitted!',
-                    'question' => $user,
-                ], 400);
-            }
-        }
 
         return response()->json(compact('user', 'token'), 201);
     }

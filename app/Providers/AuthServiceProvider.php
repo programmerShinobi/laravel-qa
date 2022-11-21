@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Policies\QuestionPolicy;
-use App\Question;
-use App\Answer;
+use App\Models\Question;
+use App\Models\Answer;
 use App\Policies\AnswerPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -15,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * The policy mappings for the application.
      *
-     * @var array
+     * @var array<class-string, class-string>
      */
     protected $policies = [
         Question::class => QuestionPolicy::class,
@@ -32,6 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Passport::routes();
+
 
         Gate::define('update-question', function ($user, $question) {
             return $user->id === $question->user_id;

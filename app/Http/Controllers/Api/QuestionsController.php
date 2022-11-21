@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Question;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Resources\QuestionResource;
 use App\Http\Requests\AskQuestionRequest;
 use Illuminate\Support\Facades\Validator;
@@ -86,7 +87,7 @@ class QuestionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Question  $question
+     * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
     public function show(Question $question)
@@ -94,9 +95,10 @@ class QuestionsController extends Controller
         $question = Question::whereId($question->id)->first();
 
         if ($question) {
+            $question->increment('views');
             return response()->json([
                 'success' => true,
-                'message' => 'Question Details!',
+                'message' => 'Question Details !',
                 'data'    => new QuestionDetailsResource($question)
             ], 200);
         } else {
@@ -112,12 +114,12 @@ class QuestionsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Question  $question
+     * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Question $question)
     {
-        $this->authorize("update", $question);
+        Gate::authorize("update", $question);
 
         //validate data
         $validator = Validator::make(
@@ -163,14 +165,13 @@ class QuestionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Question  $question
+     * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
     public function destroy(Question $question)
     {
-        $this->authorize("delete", $question);
+        Gate::authorize("delete", $question);
 
-        // $question->delete();
         if (env('APP_ENV') == 'local') sleep(2);
 
         $question = Question::findOrFail($question->id);

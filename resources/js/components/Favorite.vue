@@ -1,13 +1,14 @@
 <template>
     <a title="Click to mark as favorite question (Click again to undo)" :class="classes" @click.prevent="toggle">
-    <i class="fa-solid fa-star fa-2x"></i>
+    <em class="fa-solid fa-star fa-2x"></em>
     <span class="favorites-count">{{ count }}</span>
     </a>
 </template>
 
 <script>
-import Axios from 'axios';
+
 export default {
+
     props: ['question'],
 
     data() {
@@ -53,25 +54,23 @@ export default {
 
         destroy() {
             axios.delete(this.endpoint)
-            .then(res => {
+                .then(res => {
                 this.count--;
                 this.isFavorited = false;
             })
-            .catch(({ response }) => {
-                this.$toast.error(response.data.message, "Failed", { timeout: 3000 });
-                EventBus.$emit('error', response.data.data);
+                .then(res => {
+                this.$toast.success(res.data.message, "Success", { timeout: 2000 });
             })
         },
 
         create() {
             axios.post(this.endpoint)
-            .then(res => {
+                .then(res => {
                 this.count++;
                 this.isFavorited = true;
             })
-            .catch(({ response }) => {
-                this.$toast.error(response.data.message, "Failed", { timeout: 3000 });
-                EventBus.$emit('error', response.data.data);
+                .then(res => {
+                this.$toast.success(res.data.message, "Success", { timeout: 2000 });
             })
         }
     },

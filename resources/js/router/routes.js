@@ -51,13 +51,13 @@ const routes = [
         }
     },
     {
-        path: '/questions/:slug', 
+        path: '/questions/:slug',
         component: QuestionPage,
         name: 'questions.show',
         props: true
     },
     {
-        path: '/questions/:id', 
+        path: '/questions/:id',
         component: QuestionPage,
         name: 'questions.show',
         props: true,

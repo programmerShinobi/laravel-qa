@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
@@ -30,7 +30,7 @@ class UserController extends Controller
         }
 
         return response()->json(compact('token'));
-        
+
     }
 
     public function register(Request $request)

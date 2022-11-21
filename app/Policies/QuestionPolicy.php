@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Question;
+use App\Models\User;
+use App\Models\Question;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class QuestionPolicy
@@ -13,8 +13,8 @@ class QuestionPolicy
     /**
      * Determine whether the user can update the question.
      *
-     * @param  \App\User  $user
-     * @param  \App\Question  $question
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Question  $question
      * @return mixed
      */
     public function update(User $user, Question $question)
@@ -25,8 +25,8 @@ class QuestionPolicy
     /**
      * Determine whether the user can delete the question.
      *
-     * @param  \App\User  $user
-     * @param  \App\Question  $question
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Question  $question
      * @return mixed
      */
     public function delete(User $user, Question $question)

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Question;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Tymon\JWTAuth\Contracts\Providers\Auth;
 
 class VoteQuestionController extends Controller
 {
@@ -18,8 +19,8 @@ class VoteQuestionController extends Controller
             return response()->json([
                 'message' => 'Thanks for the feedbacks',
                 'title' => $question->title,
-                'question' => $question->body,
                 'votesCount' => $votesCount,
+                'question' => $question->body,
             ]);
         }
 

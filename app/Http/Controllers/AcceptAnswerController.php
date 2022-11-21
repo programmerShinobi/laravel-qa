@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Answer;
+use App\Models\Answer;
 use Illuminate\Http\Request;
 
 class AcceptAnswerController extends Controller
@@ -18,7 +18,7 @@ class AcceptAnswerController extends Controller
                 'message' => "You have accepted this answer as best answer"
             ]);
         }
-        
+
         return back();
     }
 }

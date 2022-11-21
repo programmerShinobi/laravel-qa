@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Answer;
+use App\Models\Answer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +18,8 @@ class VoteAnswerController extends Controller
         if (request()->expectsJson()) {
             return response()->json([
                 'message' => 'Thanks for the feedbacks',
-                'answer' => $answer->body,
                 'votesCount' => $votesCount,
+                'answer' => $answer->body,
             ]);
         }
 

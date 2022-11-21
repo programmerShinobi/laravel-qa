@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Answer;
-use App\Question;
+use App\Models\Answer;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,7 +44,7 @@ class AnswersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Answer  $answer
+     * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
     public function edit(Question $question, Answer $answer)
@@ -58,7 +58,7 @@ class AnswersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Answer  $answer
+     * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Question $question, Answer $answer)
@@ -82,7 +82,7 @@ class AnswersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Answer  $answer
+     * @param  \App\Models\Answer  $answer
      * @return \Illuminate\Http\Response
      */
     public function destroy(Question $question, Answer $answer)

@@ -13,10 +13,10 @@ class MyPostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function index(Request $request)
     {
         if (env('APP_ENV') == 'local') sleep(2);
-        
+
         return response()->json([
             'data' => $request->user()->posts()
         ]);
